@@ -1,0 +1,288 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+/* @import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite"; */
+* {
+  /* border: 1px solid red !important; */
+}
+
+* {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter";
+}
+body {
+  background: #fffef4;
+  background-image: radial-gradient(#999 5%, transparent 0);
+  background-size: 35px 35px;
+}
+
+/* --- Masukkan kode ini di file CSS kamu --- */
+
+/* Base style untuk elemen (agar transisi halus) */
+.gradasi1,
+.gradasi2 {
+  /* Transition ditambahkan di sini agar efek hover mulus saat kursor masuk & keluar */
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer; /* Menandakan bisa diklik */
+
+  /* Pastikan elemen memiliki shadow tipis di keadaan normal agar elegan */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Definisi Gradasi Asli Kamu (Tidak diubah) --- */
+.gradasi1 {
+  background: #65a11d;
+  background: linear-gradient(
+    131deg,
+    rgb(112, 192, 15) 49%,
+    rgb(7, 170, 42) 100%
+  );
+}
+
+.gradasi2 {
+  background: #65a11d;
+  background: linear-gradient(
+    168deg,
+    rgb(121, 204, 19) 55%,
+    rgba(6, 125, 32, 1) 100%
+  );
+}
+/* --- Definisi Gradasi Asli Kamu (Tidak diubah) --- */
+.gradasi3 {
+  background: #65a11d;
+  background: linear-gradient(
+    131deg,
+    rgb(112, 192, 15) 49%,
+    rgb(7, 170, 42) 100%
+  );
+}
+
+
+/* --- EFEK HOVER YANG SIMPEL & ELEGAN --- */
+/* Berlaku untuk keduanya (.gradasi1 dan .gradasi2) saat di-hover */
+
+.gradasi1:hover,
+.gradasi2:hover {
+  /* 1. Sedikit mencerahkan warna gradasi agar 'menyala' lembut */
+  filter: brightness(1.08);
+
+  /* 2. Mengangkat elemen sangat tipis ke atas (hanya 3px) */
+  transform: translateY(-3px);
+
+  /* 3. Membuat bayangan sedikit lebih tegas agar terlihat timbul secara elegan */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.gradient-border {
+  padding: 5px;
+  border-radius: 10px;
+  background-image: linear-gradient(212deg, #56ab2f, #a8e063, #40ff1a);
+}
+
+.gradient-border-content {
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.transaparan {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.33);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10.1px);
+  -webkit-backdrop-filter: blur(10.1px);
+  border: 1px solid rgba(255, 255, 255, 0.41);
+}
+
+.text-gradasi1 {
+  background-image: linear-gradient(35deg, #3f9617, #7bc91d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.judul {
+  font-size: 3rem;
+  font-weight: bolder;
+}
+.sub-judul {
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+p {
+  opacity: 50%;
+}
+
+.tombol {
+  padding: 11px 55px;
+
+  border-radius: 5rem;
+
+  -webkit-border-radius: 5rem;
+  -moz-border-radius: 5rem;
+  -ms-border-radius: 5rem;
+  -o-border-radius: 5rem;
+}
+.tombol2 {
+  padding: 11px 55px;
+  border: solid green 2px;
+  border-radius: 5rem;
+  -webkit-border-radius: 5rem;
+  -moz-border-radius: 5rem;
+  -ms-border-radius: 5rem;
+  -o-border-radius: 5rem;
+}
+
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #76b852 0%,
+    #8dc26f 51%,
+    #76b852 100%
+  );
+}
+
+.btn-grad {
+  padding: 11px 55px;
+  border-radius: 5rem;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+
+  outline: none;
+  border: none;
+}
+
+.btn-grad:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* di index */
+/* SLIDE BASE */
+.slide {
+  opacity: 0;
+  transform: scale(0.9) rotate(-4deg) translateY(60px);
+  filter: blur(10px);
+  transition: 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1) rotate(0) translateY(0);
+  filter: blur(0);
+  z-index: 2;
+}
+
+/* ANIMATION */
+@keyframes textIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SHAPE */
+.shape {
+  border-radius: 50%;
+  position: relative;
+}
+
+/* POP */
+.slide.active .shape {
+  animation:
+    shapePop 0.7s,
+    float 4s ease-in-out infinite;
+}
+
+@keyframes shapePop {
+  0% {
+    transform: scale(0) rotate(-120deg);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.1) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* FLOAT */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-30px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* REVEAL */
+.reveal {
+  overflow: hidden;
+}
+
+/* navbar */
+/* Animasi Hover Link Desktop */
+.nav-link {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Logic Tampilan Full Screen Mobile */
+#mobileMenu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+#mobileMenu.open .menu-item {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Mencegah scroll saat menu buka */
+body.menu-open {
+  overflow: hidden;
+}

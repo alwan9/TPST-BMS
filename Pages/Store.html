@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="" rel="stylesheet" />
+    <title>
+    </title>
+    <link rel="stylesheet" href="./../dist/output.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- go top -->
+    <a href="#top">
+        <div data-aos="fade-up" data-aos-anchor-placement="center-center" data-aos-duration="1500"
+            class="fixed bottom-10 right-10 gradasi1 px-3 py-3 hover:scale-110 duration-200 text-zinc-50 z-[20]  shadow-lg rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path stroke-dasharray="20" d="M12 21l0 -17.5">
+                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="20;0" />
+                    </path>
+                    <path stroke-dasharray="12" stroke-dashoffset="12" d="M12 3l7 7M12 3l-7 7">
+                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.3s" dur="0.2s" to="0" />
+                    </path>
+                </g>
+            </svg>
+        </div>
+    </a>
+    <div id="top"></div>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="fixed top-0 left-0 w-full z-[5000] px-[5%] transition-all duration-300" id="mainNavbar">
+        <div
+            class="relative z-[5001] flex justify-between  px-[5%] items-center p-4 text-zinc-50 gradasi1 rounded-b-3xl h-[70px] shadow-lg">
+            <img src="./../images/logo.png" class="h-10 hover:scale-105 transition-transform duration-300">
+
+            <ul class="hidden md:flex gap-8 font-medium">
+                <li><a href="https://alwan9.github.io/TPST-BMS/index.html" class="nav-link">Beranda</a></li>
+                <li><a href="#tentang" class="nav-link">Tentang TPST</a></li>
+                <li><a href="#3R" class="nav-link">Konsep 3R</a></li>
+                <li><a href="#footer" class="nav-link">Kontak</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <a href="https://alwan9.github.io/TPST-BMS/Pages/Store.html"
+                    class="hidden md:block p-2 hover:bg-white/20 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M5 4h14q.425 0 .713.288T20 5t-.288.713T19 6H5q-.425 0-.712-.288T4 5t.288-.712T5 4m0 16q-.425 0-.712-.288T4 19v-5h-.175q-.475 0-.775-.363t-.2-.837l1-5q.075-.35.35-.575T4.825 7h14.35q.35 0 .625.225t.35.575l1 5q.1.475-.2.837t-.775.363H20v5q0 .425-.288.713T19 20t-.712-.288T18 19v-5h-4v5q0 .425-.288.713T13 20zm1-2h6v-4H6zm-.95-6h13.9zm0 0h13.9l-.6-3H5.65z" />
+                    </svg>
+                </a>
+
+                <a href="https://alwan9.github.io/TPST-BMS/Pages/Maps.html"
+                    class="hidden md:block hover:text-green-200 duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-width="1">
+                            <path stroke-width="1.5"
+                                d="M15.129 13.747a.906.906 0 0 1-1.258 0c-1.544-1.497-3.613-3.168-2.604-5.595A3.53 3.53 0 0 1 14.5 6c1.378 0 2.688.84 3.233 2.152c1.008 2.424-1.056 4.104-2.604 5.595Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.5 9.5h.009" />
+                            <path stroke-width="1.5"
+                                d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M17 21L3 7m7 7l-6 6" />
+                        </g>
+                    </svg>
+                </a>
+
+                <button id="menuBtn"
+                    class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/20 transition-all active:scale-90">
+                    <span id="menuIcon" class="text-2xl">☰</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu"
+            class="fixed inset-0 h-screen w-full opacity-0 invisible md:hidden bg-white/95 backdrop-blur-2xl transition-all duration-500 ease-in-out z-[4999] flex items-center justify-center">
+            <ul class="flex flex-col items-center gap-6 font-bold text-2xl text-gray-800 text-center">
+                <li class="translate-y-10 opacity-0 transition-all duration-500 menu-item">
+                    <a href="https://alwan9.github.io/TPST-BMS/index.html"
+                        class="hover:text-green-600 transition-colors">🏠
+                        Beranda</a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[100ms] menu-item">
+                    <a href="#tentang" class="hover:text-green-600 transition-colors">♻️ Tentang TPST</a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[200ms] menu-item">
+                    <a href="#3R" class="hover:text-green-600 transition-colors">💡 Konsep 3R</a>
+                </li>
+                <li
+                    class="translate-y-10 opacity-0 transition-all duration-500 delay-[300ms] menu-item  flex items-center gap-3">
+                    <a href="https://alwan9.github.io/TPST-BMS/Pages/Store.html"
+                        class="hover:text-green-600 transition-colors flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M5 4h14q.425 0 .713.288T20 5t-.288.713T19 6H5q-.425 0-.712-.288T4 5t.288-.712T5 4m0 16q-.425 0-.712-.288T4 19v-5h-.175q-.475 0-.775-.363t-.2-.837l1-5q.075-.35.35-.575T4.825 7h14.35q.35 0 .625.225t.35.575l1 5q.1.475-.2.837t-.775.363H20v5q0 .425-.288.713T19 20t-.712-.288T18 19v-5h-4v5q0 .425-.288.713T13 20zm1-2h6v-4H6zm-.95-6h13.9zm0 0h13.9l-.6-3H5.65z" />
+                        </svg>
+                        Store
+                    </a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[400ms] menu-item ">
+                    <a href="https://alwan9.github.io/TPST-BMS/Pages/Maps.html"
+                        class="hover:text-green-600 transition-colors flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-width="1">
+                                <path stroke-width="1.5"
+                                    d="M15.129 13.747a.906.906 0 0 1-1.258 0c-1.544-1.497-3.613-3.168-2.604-5.595A3.53 3.53 0 0 1 14.5 6c1.378 0 2.688.84 3.233 2.152c1.008 2.424-1.056 4.104-2.604 5.595Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.5 9.5h.009" />
+                                <path stroke-width="1.5"
+                                    d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M17 21L3 7m7 7l-6 6" />
+                            </g>
+                        </svg>Cari TPST terdekat
+                    </a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[500ms] menu-item">
+                    <a href="#footer" class="hover:text-green-600 transition-colors">📞 Kontak</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- CTA (Call to Action) Section -->
+    <div data-aos="fade-up" data-aos-anchor-placement="center-center" data-aos-duration="1000"
+        class="w-[90%] lg:w-[80%] grid grid-cols-2  md:gap-[10%]  justify-between   mx-auto relative z-10  row rounded-3xl lg:mt-[10%] xl:mt-[5%] mt-[20%] gradasi1  px-[5%] py-7 items-center text-orange-50">
+        <div data-aos="fade-up" data-aos-anchor-placement="center-center" data-aos-duration="1300">
+            <h1 class="text-sm lg:text-4xl leading-2  font-medium">
+                Daur Ulang Lebih Bernilai
+            </h1>
+            <p class="text-xs font-light lg:text-2xl">
+                Barang bekas bisa menjadi produk berkualitas yang bermanfaat dan ramah lingkungan. 🌱
+            </p>
+        </div>
+        <div data-aos="fade-up" data-aos-anchor-placement="center-center" data-aos-duration="1300">
+            <img class="w-full px-[20%] md:px-[30%]" src="../images/store.png" alt="">
+        </div>
+    </div>
+
+
+
+    <div data-aos="fade-up" data-aos-duration="1500" class="text-center mt-[5%]">
+        <h1 class="text-[2rem] md:text-[3rem] xl:text-[4rem] font-bold   leading-tight">
+            Marketplace <span class="text-gradasi1">Ramah Lingkungan</span>
+        </h1>
+        <p class="px-[20%] text-sm lg:text-base">
+            Produk ramah lingkungan tersedia di sini.
+            <span class="hidden lg:block -leading-10">
+                Marketplace ini menghadirkan berbagai produk yang dibuat dari bahan daur ulang atau bahan lebih
+                berkelanjutan. Dengan berbelanja di sini, kamu tidak hanya mendapatkan produk bermanfaat, tetapi juga
+                ikut mendukung upaya pengurangan sampah dan menjaga lingkungan.
+            </span>
+        </p>
+    </div>
+
+
+    <div class="flex justify-center w-full items-center mt-10">
+        <div class="xl:flex gap-2 xl:w-[50%] px-[5%]">
+            <input type="text" id="searchInput" placeholder="Cari produk..."
+                class="w-full xl:w-[40%] px-4 py-2 border border-zinc-200 bg-zinc-50 focus:bg-white focus:border-green-300 outline-none rounded-xl text-sm transition duration-200">
+            <div class="md:flex gap-2 justify-center xl:justify-start xl:w-[50%] px-[5%] xl:px-0 mt-5 xl:mt-0">
+
+                <!-- ACTIVE -->
+                <button
+                    class="filterBtn gradasi1 text-white border border-green-200 shadow-sm hover:bg-green-500 duration-200 px-3 md:px-4 py-1 mt-2 md:mt-0 text-xs md:text-base rounded-lg md:rounded-xl"
+                    data-kategori="all">Semua</button>
+
+                <!-- DEFAULT -->
+                <button
+                    class="filterBtn bg-zinc-100 text-zinc-600 border border-zinc-200 hover:bg-green-50 hover:text-green-700 hover:border-green-200 duration-200 px-3 md:px-4 py-1 mt-2 md:mt-0 text-xs md:text-base rounded-lg md:rounded-xl"
+                    data-kategori="Food">Food</button>
+                <button
+                    class="filterBtn bg-zinc-100 text-zinc-600 border border-zinc-200 hover:bg-green-50 hover:text-green-700 hover:border-green-200 duration-200 px-3 md:px-4 py-1 mt-2 md:mt-0 text-xs md:text-base rounded-lg md:rounded-xl"
+                    data-kategori="Bangunan">Bangunan</button>
+                <button
+                    class="filterBtn bg-zinc-100 text-zinc-600 border border-zinc-200 hover:bg-green-50 hover:text-green-700 hover:border-green-200 duration-200 px-3 md:px-4 py-1 mt-2 md:mt-0 text-xs md:text-base rounded-lg md:rounded-xl"
+                    data-kategori="Olahan">Olahan</button>
+                <button
+                    class="filterBtn bg-zinc-100 text-zinc-600 border border-zinc-200 hover:bg-green-50 hover:text-green-700 hover:border-green-200 duration-200 px-3 md:px-4 py-1 mt-2 md:mt-0 text-xs md:text-base rounded-lg md:rounded-xl"
+                    data-kategori="Kerajinan">Kerajinan</button>
+                <button
+                    class="filterBtn bg-zinc-100 text-zinc-600 border border-zinc-200 hover:bg-green-50 hover:text-green-700 hover:border-green-200 duration-200 px-3 md:px-4 py-1 mt-2 md:mt-0 text-xs md:text-base rounded-lg md:rounded-xl"
+                    data-kategori="Tanaman">Tanaman</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="produkContainer"
+        class="grid bg-center bg-cover grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-5 items-center px-[5%] lg:px-[10%] mx-auto mt-[10%] lg:mt-[2%] md:mt-[5%] relative z-[4]">
+    </div>
+
+    <footer class="bg-zinc-900 text-white mt-20 relative z-[5] border-t border-zinc-800">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start">
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        <img src="./../images/trash-bin (1).gif" alt="EcoWaste Icon" class="w-12 h-12 object-contain">
+                        <img src="./../images/logo.png" alt="EcoWaste Logo" class="w-32 object-contain">
+                    </div>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Platform digital inovatif untuk mengelola sampah dengan cerdas demi mewujudkan lingkungan
+                        Indonesia yang lebih bersih dan berkelanjutan.
+                    </p>
+                </div>
+
+                <div>
+                    <h4
+                        class="font-bold text-lg mb-6 text-zinc-100 relative inline-block after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-8 after:h-1 after:bg-green-500 after:rounded">
+                        Fitur
+                    </h4>
+                    <ul class="space-y-3 text-zinc-400">
+                        <li><a href="#" class="hover:text-green-400 transition-colors duration-300">Beranda</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors duration-300">Acara</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors duration-300">Berita</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors duration-300">Galeri</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4
+                        class="font-bold text-lg mb-6 text-zinc-100 relative inline-block after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-8 after:h-1 after:bg-green-500 after:rounded">
+                        Resources
+                    </h4>
+                    <ul class="space-y-3 text-zinc-400">
+                        <li><a href="#" class="hover:text-green-400 transition-colors duration-300">Pusat Bantuan</a>
+                        </li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors duration-300">Kebijakan
+                                Privasi</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors duration-300">Syarat &
+                                Ketentuan</a></li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col items-start lg:items-end">
+                    <div class="bg-white p-2 rounded-xl shadow-lg transition-transform hover:scale-105 duration-300">
+                        <img class="w-32 h-32 object-cover rounded-lg" src="../images/V-Card.jpg" alt="V-Card Contact">
+                    </div>
+                    <p class="text-xs text-zinc-500 mt-3 lg:text-right">Scan untuk kontak kami</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div
+            class="gradasi1 animate-none  w-full py-6 px-[10%] flex flex-col md:flex-row justify-between items-center border-t border-white/10">
+            <p class="text-zinc-50/90 text-sm font-medium">
+                &copy; 2026 <span class="font-bold">EcoWaste</span>. All rights reserved.
+            </p>
+
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#"
+                    class="text-white/80 hover:text-white transform hover:-translate-y-1 transition-all duration-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                    </svg>
+                </a>
+                <a href="#"
+                    class="text-white/80 hover:text-white transform hover:-translate-y-1 transition-all duration-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                    </svg>
+                </a>
+                <a href="#"
+                    class="text-white/80 hover:text-white transform hover:-translate-y-1 transition-all duration-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.477 2 2 6.477 2 12.001c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.001C22 6.477 17.523 2 12 2z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="./../src/script.js"></script>
+    <script type="module" src="./../src/search.js"></script>
+    <script src="./../src/global.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

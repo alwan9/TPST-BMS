@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Rumah Sakit Terdekat</title>
+    <link rel="stylesheet" href="./../dist/output.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+
+</head>
+<style>
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* MAP FULL AREA - Sekarang benar-benar di belakang */
+    #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    nav {
+        z-index: 2000 !important;
+    }
+
+    #sidebar {
+        z-index: 1500 !important;
+        position: relative;
+    }
+
+    #navPanel {
+        z-index: 3000 !important;
+    }
+
+    .map-controls {
+        z-index: 1000;
+        pointer-events: auto;
+    }
+
+    .distance-bar {
+        transition: width 0.8s ease-in-out, background-color 0.5s ease;
+    }
+</style>
+
+<body>
+    <div id="map"></div>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="fixed top-0 left-0 w-full z-[5000] px-[5%] transition-all duration-300" id="mainNavbar">
+        <div
+            class="relative z-[5001] flex justify-between  px-[5%] items-center p-4 text-zinc-50 gradasi1 rounded-b-3xl h-[70px] shadow-lg">
+            <img src="../images/logo.png" class="h-10 hover:scale-105 transition-transform duration-300">
+
+            <ul class="hidden md:flex gap-8 font-medium">
+                <li><a href="https://alwan9.github.io/TPST-BMS/index.html" class="nav-link">Beranda</a></li>
+                <li><a href="#tentang" class="nav-link">Tentang TPST</a></li>
+                <li><a href="#3R" class="nav-link">Konsep 3R</a></li>
+                <li><a href="#footer" class="nav-link">Kontak</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <a href="https://alwan9.github.io/TPST-BMS/Pages/Store.html"
+                    class="hidden md:block p-2 hover:bg-white/20 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M5 4h14q.425 0 .713.288T20 5t-.288.713T19 6H5q-.425 0-.712-.288T4 5t.288-.712T5 4m0 16q-.425 0-.712-.288T4 19v-5h-.175q-.475 0-.775-.363t-.2-.837l1-5q.075-.35.35-.575T4.825 7h14.35q.35 0 .625.225t.35.575l1 5q.1.475-.2.837t-.775.363H20v5q0 .425-.288.713T19 20t-.712-.288T18 19v-5h-4v5q0 .425-.288.713T13 20zm1-2h6v-4H6zm-.95-6h13.9zm0 0h13.9l-.6-3H5.65z" />
+                    </svg>
+                </a>
+
+                <a href="https://alwan9.github.io/TPST-BMS/Pages/Maps.html"
+                    class="hidden md:block hover:text-green-200 duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-width="1">
+                            <path stroke-width="1.5"
+                                d="M15.129 13.747a.906.906 0 0 1-1.258 0c-1.544-1.497-3.613-3.168-2.604-5.595A3.53 3.53 0 0 1 14.5 6c1.378 0 2.688.84 3.233 2.152c1.008 2.424-1.056 4.104-2.604 5.595Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.5 9.5h.009" />
+                            <path stroke-width="1.5"
+                                d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M17 21L3 7m7 7l-6 6" />
+                        </g>
+                    </svg>
+                </a>
+
+                <button id="menuBtn"
+                    class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/20 transition-all active:scale-90">
+                    <span id="menuIcon" class="text-2xl">☰</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu"
+            class="fixed inset-0 h-screen w-full opacity-0 invisible md:hidden bg-white/95 backdrop-blur-2xl transition-all duration-500 ease-in-out z-[4999] flex items-center justify-center">
+            <ul class="flex flex-col items-center gap-6 font-bold text-2xl text-gray-800 text-center">
+                <li class="translate-y-10 opacity-0 transition-all duration-500 menu-item">
+                    <a href="https://alwan9.github.io/TPST-BMS/index.html" class="hover:text-green-600 transition-colors">🏠
+                        Beranda</a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[100ms] menu-item">
+                    <a href="#tentang" class="hover:text-green-600 transition-colors">♻️ Tentang TPST</a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[200ms] menu-item">
+                    <a href="#3R" class="hover:text-green-600 transition-colors">💡 Konsep 3R</a>
+                </li>
+                <li
+                    class="translate-y-10 opacity-0 transition-all duration-500 delay-[300ms] menu-item  flex items-center gap-3">
+                    <a href="https://alwan9.github.io/TPST-BMS/Pages/Store.html"
+                        class="hover:text-green-600 transition-colors flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M5 4h14q.425 0 .713.288T20 5t-.288.713T19 6H5q-.425 0-.712-.288T4 5t.288-.712T5 4m0 16q-.425 0-.712-.288T4 19v-5h-.175q-.475 0-.775-.363t-.2-.837l1-5q.075-.35.35-.575T4.825 7h14.35q.35 0 .625.225t.35.575l1 5q.1.475-.2.837t-.775.363H20v5q0 .425-.288.713T19 20t-.712-.288T18 19v-5h-4v5q0 .425-.288.713T13 20zm1-2h6v-4H6zm-.95-6h13.9zm0 0h13.9l-.6-3H5.65z" />
+                        </svg>
+                        Store
+                    </a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[400ms] menu-item ">
+                    <a href="https://alwan9.github.io/TPST-BMS/Pages/Maps.html"
+                        class="hover:text-green-600 transition-colors flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-width="1">
+                                <path stroke-width="1.5"
+                                    d="M15.129 13.747a.906.906 0 0 1-1.258 0c-1.544-1.497-3.613-3.168-2.604-5.595A3.53 3.53 0 0 1 14.5 6c1.378 0 2.688.84 3.233 2.152c1.008 2.424-1.056 4.104-2.604 5.595Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.5 9.5h.009" />
+                                <path stroke-width="1.5"
+                                    d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M17 21L3 7m7 7l-6 6" />
+                            </g>
+                        </svg>Cari TPST terdekat
+                    </a>
+                </li>
+                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[500ms] menu-item">
+                    <a href="#footer" class="hover:text-green-600 transition-colors">📞 Kontak</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="flex flex-col md:flex-row h-[120vh] mt-[150%] md:mt-0 md:h-[100vh] w-full md:overflow-hidden ">
+        <!-- SIDEBAR -->
+        <div data-aos-duration="1500" data-aos="fade-up" id="sidebar"
+            class="order-2 md:order-1 w-full md:w-[420px] rounded-t-3xl md:rounded-t-none pt-[3%] lg:pt-[7%]  z-[10] gradasi3  shadow-xl   ">
+            <div class="flex items-center justify-between px-[4%]  max-h-[100px] ">
+                <div>
+                    <h2 class="text-zinc-50 text-xl font-bold">
+                        ♻ TPST Terdekat
+                    </h2>
+                    <button onclick="getLocation()" class="w-full bg-zinc-50 px-3 py-1 rounded-lg">
+                        Aktifkan Lokasi Saya
+                    </button>
+                </div>
+                <img class="w-[150px] min-h-[120px] pt-[10%] drop-shadow-lg" src="./../images/tpst.png" alt="">
+            </div>
+            <div class="bg-zinc-50 px-[5%] rounded-t-3xl  lg:h-[82vh]    ">
+                <p class=" pt-[10%] md:pt-[3%]">"Daftar TPST Terdekat"</p>
+                <div id="tpstList" class="space-y-2 pt-[3%] h-full overflow-y-auto"></div>
+            </div>
+        </div>
+
+        <!-- MAP -->
+        <div class="order-1 md:order-2 flex-1 relative h-screen">
+            <button data-aos-duration="1500" data-aos="fade-left" onclick="toggleSidebar()"
+                class="absolute bottom-20 right-5 lg:bottom-auto hidden md:block lg:right-auto  lg:top-24 lg:left-4 z-[2000] bg-white shadow-lg px-3 py-2 rounded-lg">
+                ☰
+            </button>
+            <div data-aos-duration="1500" data-aos="fade-right"
+                class="absolute bottom-10 md:bottom-5 left-5 grid md:grid-cols-4 gap-2 bg-white p-2 md:p-3 rounded-xl shadow-2xl z-[10]">
+
+                <div class="cursor-pointer text-center group" onclick="setMap('default')">
+                    <img src="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/10/350/546"
+                        class="w-[40px] h-[40px] md:w-[80px] md:h-[80px] rounded-lg object-cover group-hover:border-4 border-green-600">
+                    <p class="text-[10px] md:text-xs mt-1">Default</p>
+                </div>
+
+                <div class="cursor-pointer text-center group" onclick="setMap('normal')">
+                    <img src="https://tile.openstreetmap.org/10/546/350.png"
+                        class="w-[40px] h-[40px] md:w-[80px] md:h-[80px] rounded-lg object-cover group-hover:border-4 border-green-600">
+                    <p class="text-[10px] md:text-xs mt-1">Normal</p>
+                </div>
+
+                <div class="cursor-pointer text-center group" onclick="setMap('sat')">
+                    <img src="https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/10/350/546"
+                        class="w-[40px] h-[40px] md:w-[80px] md:h-[80px] rounded-lg object-cover group-hover:border-4 border-green-600">
+                    <p class="text-[10px] md:text-xs mt-1">Satellite</p>
+                </div>
+
+                <div class="cursor-pointer text-center group" onclick="setMap('dark')">
+                    <img src="https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/10/546/350.png"
+                        class="w-[40px] h-[40px] md:w-[80px] md:h-[80px] rounded-lg object-cover group-hover:border-4 border-green-600">
+                    <p class="text-[10px] md:text-xs mt-1">Dark</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- NAVIGATION PANEL -->
+    <div id="navPanel" class="  fixed top-2 px-[12%] pt-[2%] w-full lg:right-5 z-[5] hidden">
+        <div class="bg-white p-4 rounded-xl shadow-2xl w-full xl:w-[260px]">
+            <div class="flex justify-between items-center">
+                <h3 class="text-green-600 font-bold">
+                    Navigasi
+                </h3>
+                <button onclick="toggleNav()" class="text-gray-500">
+                    ✕
+                </button>
+            </div>
+            <p id="stepText" class="text-sm mt-3"></p>
+            <div class="flex justify-between mt-4">
+                <button onclick="prevStep()" class="px-3 py-1 bg-green-600 text-white rounded">
+                    Back
+                </button>
+                <button onclick="nextStep()" class="px-3 py-1 bg-green-600 text-white rounded">
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+   
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../src/global.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script type="module">
+        import { tpst } from "./../data_list/tps.js"
+
+        // 1. INIT MAP
+        const maps = {
+            default: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'),
+            normal: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
+            sat: L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
+            dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png')
+        };
+        let baseLayer = maps.default;
+        const map = L.map('map', { center: [-7.42, 109.24], zoom: 13, layers: [baseLayer], zoomControl: false });
+
+        // 2. HEATMAP
+        const heatLayer = L.heatLayer(tpst.map(t => [t.lat, t.lon, t.volume]), {
+            radius: 40, blur: 25, max: 1.0, minOpacity: 0.5,
+            gradient: { 0: 'blue', 0.3: 'cyan', 0.5: 'lime', 0.7: 'yellow', 0.8: 'orange', 1: 'red' }
+        }).addTo(map);
+
+        window.toggleHeatmap = () => map.hasLayer(heatLayer) ? map.removeLayer(heatLayer) : heatLayer.addTo(map);
+
+        // 3. LOGIKA STATUS (Supaya Sinkron Marker & Sidebar)
+        const getStatus = (v) => {
+            if (v >= 0.7) return { label: "Penuh", color: "text-red-600", bg: "bg-red-100", hex: "#ef4444" };
+            if (v >= 0.4) return { label: "Hampir Penuh", color: "text-orange-500", bg: "bg-orange-100", hex: "#f97316" };
+            return { label: "Tersedia", color: "text-green-600", bg: "bg-green-100", hex: "#10b981" };
+        };
+
+        const getDistance = (lat1, lon1, lat2, lon2) => {
+            const R = 6371, dLat = (lat2 - lat1) * Math.PI / 180, dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        };
+
+        // 4. LOAD DATA (MARKER & SIDEBAR)
+        const list = document.getElementById("tpstList");
+        tpst.forEach(t => {
+            const s = getStatus(t.volume);
+            const marker = L.marker([t.lat, t.lon]).addTo(map).bindPopup(`
+            <div>
+                <div class="flex gap-2 items-center mb-2">
+                    <img src="../images/loc.png" class="w-[20px]">
+                    <div>
+                        <h4 class="font-bold">${t.nama}</h4>
+                        <div class="text-xs ${s.color} font-bold uppercase tracking-wider">● ${s.label} (${(t.volume * 100).toFixed(0)}%)</div>
+                    </div>
+                </div>
+                <div class="text-[11px] text-gray-500 mb-3">${t.layanan}</div>
+                <div class="flex gap-2 items-center text-gray-700">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0"/><path d="M14.5 9.25a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0M17 19.5c-.317-6.187-9.683-6.187-10 0"/></svg> 
+                    <span class="text-xs">${t.penanggung}</span>
+                </div>
+                <div class="flex gap-1 items-center text-gray-700 mt-1">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="m7.254 18.494l.724.423A7.95 7.95 0 0 0 12.001 20a8 8 0 1 0-8-8a7.95 7.95 0 0 0 1.084 4.024l.422.724l-.653 2.401zM2.005 22l1.352-4.968A9.95 9.95 0 0 1 2.001 12c0-5.523 4.477-10 10-10s10 4.477 10 10s-4.477 10-10 10a9.95 9.95 0 0 1-5.03-1.355zM8.392 7.308q.202-.014.403-.004q.081.006.162.016c.159.018.334.115.393.249q.447 1.015.868 2.04c.062.152.025.347-.093.537c-.06.097-.154.233-.263.372c-.113.145-.356.411-.356.411s-.099.118-.061.265c.014.056.06.137.102.205l.059.095c.256.427.6.86 1.02 1.268c.12.116.237.235.363.346c.468.413.998.75 1.57 1l.005.002c.085.037.128.057.252.11q.093.039.191.066q.036.01.073.011a.35.35 0 0 0 .295-.142c.723-.876.79-.933.795-.933v.002a.48.48 0 0 1 .378-.127q.092.004.177.04c.531.243 1.4.622 1.4.622l.582.261c.098.047.187.158.19.265c.004.067.01.175-.013.373c-.032.259-.11.57-.188.733a1.2 1.2 0 0 1-.21.302a2.4 2.4 0 0 1-.33.288q-.124.092-.125.09a5 5 0 0 1-.383.22a2 2 0 0 1-.833.23c-.185.01-.37.024-.556.014c-.008 0-.568-.087-.568-.087a9.45 9.45 0 0 1-3.84-2.046c-.226-.199-.436-.413-.65-.626c-.888-.885-1.561-1.84-1.97-2.742a3.5 3.5 0 0 1-.33-1.413a2.73 2.73 0 0 1 .565-1.68c.073-.094.142-.192.261-.305c.126-.12.207-.184.294-.228a1 1 0 0 1 .371-.1"/></svg> 
+                    <span class="text-xs">${t.hp}</span>
+                </div>
+                <div class="flex gap-2 mt-4">
+                    <button class="bg-emerald-600 text-white px-3 py-1.5 rounded-md flex gap-2 items-center text-xs hover:bg-emerald-700 transition-all" onclick="routeTo(${t.lat},${t.lon})">Navigasi</button>
+                    <a href="https://wa.me/62${t.hp}" target="_blank" class="no-underline">
+                        <button class="bg-zinc-100 text-zinc-700 border border-zinc-200 px-3 py-1.5 rounded-md text-xs">Hubungi</button>
+                    </a>
+                </div>
+            </div>`);
+
+            const div = document.createElement("div");
+            div.className = "p-4 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 duration-200 mb-3 shadow-sm bg-white";
+            div.innerHTML = `
+            <div class="flex items-start justify-between">
+                <div class="flex items-start gap-3">
+                    <div class="p-2 ${s.bg} rounded-lg"><img src="../images/loc.png" class="w-[24px]"></div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2"><b class="text-slate-800 text-sm">${t.nama}</b><span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${s.bg} ${s.color}">${s.label}</span></div>
+                        <p class="text-[11px] text-gray-500 mt-1">${t.layanan}</p>
+                        <div class="mt-3 w-full bg-gray-100 rounded-full h-1.5 overflow-hidden"><div class="h-full rounded-full transition-all duration-500" style="width: ${t.volume * 100}%; background-color: ${s.hex}"></div></div>
+                        <div class="flex justify-between items-center mt-2"><span class="text-[10px] text-gray-400 distance-text italic tracking-tighter">Menghitung jarak...</span><span class="text-[10px] font-medium text-slate-400 uppercase tracking-widest">${(t.volume * 100).toFixed(0)}% Kapasitas</span></div>
+                    </div>
+                </div>
+                <div class="text-slate-300"><svg width="16" height="16" viewBox="0 0 1024 1024"><path fill="currentColor" d="M338.8 104.7a64 64 0 0 0 0 90.5L655.6 512L338.8 828.8a64 64 0 0 0 90.4 90.5l362.1-362a64 64 0 0 0 0-90.5l-362-362.1a64 64 0 0 0-90.5 0"/></svg></div>
+            </div>`;
+            div.onclick = () => { map.setView([t.lat, t.lon], 16); marker.openPopup(); };
+            list.appendChild(div);
+            t.textElement = div.querySelector(".distance-text");
+        });
+
+        // 5. LOCATION & ROUTING
+        let userMarker, routeControl, steps = [], stepIndex = 0;
+        window.getLocation = () => navigator.geolocation.getCurrentPosition(pos => {
+            const { latitude: lat, longitude: lon } = pos.coords;
+            if (userMarker) map.removeLayer(userMarker);
+            userMarker = L.marker([lat, lon]).addTo(map).bindPopup("Lokasi Anda").openPopup();
+            map.setView([lat, lon], 15);
+            tpst.forEach(t => {
+                const d = getDistance(lat, lon, t.lat, t.lon);
+                if (t.textElement) t.textElement.innerText = d.toFixed(2) + " km dari lokasi Anda";
+            });
+        }, () => alert("GPS Gagal"));
+
+        window.routeTo = (lat, lon) => {
+            if (!userMarker) return alert("Aktifkan lokasi dulu");
+            if (routeControl) map.removeControl(routeControl);
+            routeControl = L.Routing.control({
+                waypoints: [userMarker.getLatLng(), L.latLng(lat, lon)],
+                lineOptions: { styles: [{ color: '#16a34a', weight: 6 }] },
+                createMarker: () => null, show: false
+            }).addTo(map).on("routesfound", e => {
+                steps = e.routes[0].instructions; stepIndex = 0;
+                document.getElementById("navPanel").classList.remove("hidden");
+                updateStep();
+            });
+        };
+
+        // 6. UI EXPORTS
+        const updateStep = () => { if (steps.length) document.getElementById("stepText").innerText = steps[stepIndex].text + " • " + steps[stepIndex].distance + " m"; };
+        window.nextStep = () => { if (stepIndex < steps.length - 1) { stepIndex++; updateStep(); } };
+        window.prevStep = () => { if (stepIndex > 0) { stepIndex--; updateStep(); } };
+        window.setMap = (type) => { map.removeLayer(baseLayer); baseLayer = maps[type]; baseLayer.addTo(map); };
+        window.toggleSidebar = () => { const s = document.getElementById("sidebar"); s.style.display = s.style.display === "none" ? "block" : "none"; };
+        window.toggleNav = () => document.getElementById("navPanel").classList.toggle("hidden");
+
+        L.marker([-7.389, 109.285]).addTo(map).bindPopup("Lokasi Saya");
+        L.circle([-7.389, 109.285], { color: 'green', fillOpacity: 0.1, radius: 5000 }).addTo(map);
+    </script>
+</body>
+
+
+</html>
