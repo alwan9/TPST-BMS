@@ -59,13 +59,13 @@
     <nav class="fixed top-0 left-0 w-full z-[5000] px-[5%] transition-all duration-300" id="mainNavbar">
         <div
             class="relative z-[5001] flex justify-between  px-[5%] items-center p-4 text-zinc-50 gradasi1 rounded-b-3xl h-[70px] shadow-lg">
-            <img src="../images/logo.png" class="h-10 hover:scale-105 transition-transform duration-300">
+            <img src="./images/logo.png" class="h-10 hover:scale-105 transition-transform duration-300">
 
             <ul class="hidden md:flex gap-8 font-medium">
                 <li><a href="https://alwan9.github.io/TPST-BMS/index.html" class="nav-link">Beranda</a></li>
-                <li><a href="https://alwan9.github.io/TPST-BMS#tentang" class="nav-link">Tentang TPST</a></li>
-                <li><a href="https://alwan9.github.io/TPST-BMS#3R" class="nav-link">Konsep 3R</a></li>
-                <li><a href="https://alwan9.github.io/TPST-BMS#footer" class="nav-link">Kontak</a></li>
+                <li><a href="#tentang" class="nav-link">Tentang TPST</a></li>
+                <li><a href="#layanan" class="nav-link">Layanan</a></li>
+                <li><a href="#footer" class="nav-link">Kontak</a></li>
             </ul>
 
             <div class="flex items-center gap-4">
@@ -78,7 +78,7 @@
                 </a>
 
                 <a href="https://alwan9.github.io/TPST-BMS/Pages/Maps.html"
-                    class="hidden md:block hover:text-green-200 duration-200">
+                    class="hidden md:flex  duration-200 border-[1px] hover:bg-white/20 border-white px-3 py-1 rounded-lg  items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <g fill="none" stroke="currentColor" stroke-width="1">
                             <path stroke-width="1.5"
@@ -90,6 +90,7 @@
                                 d="M17 21L3 7m7 7l-6 6" />
                         </g>
                     </svg>
+                    Gabung
                 </a>
 
                 <button id="menuBtn"
@@ -98,24 +99,42 @@
                 </button>
             </div>
         </div>
-
         <div id="mobileMenu"
-            class="fixed inset-0 h-screen w-full opacity-0 invisible md:hidden bg-white/95 backdrop-blur-2xl transition-all duration-500 ease-in-out z-[4999] flex items-center justify-center">
-            <ul class="flex flex-col items-center gap-6 font-bold text-2xl text-gray-800 text-center">
-                <li class="translate-y-10 opacity-0 transition-all duration-500 menu-item">
-                    <a href="https://alwan9.github.io/TPST-BMS/index.html" class="hover:text-green-600 transition-colors">🏠
-                        Beranda</a>
+            class="fixed inset-0 h-screen w-full opacity-0 invisible md:hidden bg-white/95 backdrop-blur-2xl transition-all duration-500 ease-in-out z-[4999] flex items-center justify-start">
+            <ul
+                class="flex flex-col justify-start items-start gap-6 font-bold text-2xl text-gray-800 text-left pl-[3%] w-full">
+
+                <li class="translate-y-10 opacity-0 transition-all duration-500 menu-item w-full">
+                    <a href="https://alwan9.github.io/TPST-BMS/index.html"
+                        class="hover:text-green-600 flex items-center gap-3 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5" d="m3.75 5.75v7.5h8.5v-7.5m-10.5 1.5 6.25-5.5l6.25 5.5" />
+                        </svg>
+                        Beranda
+                    </a>
                 </li>
-                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[100ms] menu-item">
-                    <a href="#tentang" class="hover:text-green-600 transition-colors">♻️ Tentang TPST</a>
+<li class="translate-y-10 opacity-0 transition-all duration-500 delay-[100ms] menu-item w-full">
+    <a href="#tentang" class="hover:text-green-600 flex items-center gap-3 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+            <path fill="currentColor"
+                d="M14.037 5.65c.86-1.533 3.066-1.533 3.926 0l2.606 4.651l-1.601-.283a1.25 1.25 0 1 0-.436 2.462l4.25.75a1.25 1.25 0 0 0 1.404-.835l1.25-3.75a1.25 1.25 0 0 0-2.372-.791l-.373 1.12l-2.547-4.546c-1.814-3.237-6.474-3.237-8.288 0L9.651 8.363a1.25 1.25 0 1 0 2.18 1.222zm12.048 9.382a1.25 1.25 0 0 0-2.18 1.222l3.303 5.896c.84 1.5-.244 3.35-1.963 3.35h-6.327l.792-.95a1.25 1.25 0 0 0-1.92-1.601l-2.5 3a1.25 1.25 0 0 0 0 1.6l2.5 3a1.25 1.25 0 0 0 1.92-1.6L18.92 28h6.325c3.63 0 5.918-3.905 4.144-7.072zM11.748 25.5H6.753c-1.72 0-2.803-1.85-1.963-3.35l3.548-6.33l.809 1.518a1.25 1.25 0 0 0 2.206-1.176l-2-3.75a1.25 1.25 0 0 0-1.308-.645l-4.5.75a1.25 1.25 0 1 0 .41 2.466l2.19-.365l-3.536 6.31C.835 24.094 3.123 28 6.753 28h4.995a1.25 1.25 0 1 0 0-2.5" />
+        </svg>
+        Tentang TPST
+    </a>
                 </li>
-                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[200ms] menu-item">
-                    <a href="#3R" class="hover:text-green-600 transition-colors">💡 Konsep 3R</a>
+<li class="translate-y-10 opacity-0 transition-all duration-500 delay-[200ms] menu-item w-full">
+    <a href="#layanan" class="hover:text-green-600 flex items-center gap-3 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+            <path fill="currentColor"
+                d="M29 30H19a1 1 0 0 1-1-1V19a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1m-9-2h8v-8h-8zM8 30c-3.308 0-6-2.692-6-6s2.692-6 6-6s6 2.692 6 6s-2.692 6-6 6m0-10c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4s-1.794-4-4-4m14-6H10a1 1 0 0 1-.857-1.515l6.002-10.003C15.338 2.16 15.669 2 16 2s.662.16.855.482l6.002 10.003A1 1 0 0 1 22 14m-10.234-2h8.468L16 4.944z" />
+        </svg>
+        Layanan
+    </a>
                 </li>
-                <li
-                    class="translate-y-10 opacity-0 transition-all duration-500 delay-[300ms] menu-item  flex items-center gap-3">
+<li class="translate-y-10 opacity-0 transition-all duration-500 delay-[300ms] menu-item w-full">
                     <a href="https://alwan9.github.io/TPST-BMS/Pages/Store.html"
-                        class="hover:text-green-600 transition-colors flex items-center gap-3">
+                        class="hover:text-green-600 flex items-center gap-3 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="M5 4h14q.425 0 .713.288T20 5t-.288.713T19 6H5q-.425 0-.712-.288T4 5t.288-.712T5 4m0 16q-.425 0-.712-.288T4 19v-5h-.175q-.475 0-.775-.363t-.2-.837l1-5q.075-.35.35-.575T4.825 7h14.35q.35 0 .625.225t.35.575l1 5q.1.475-.2.837t-.775.363H20v5q0 .425-.288.713T19 20t-.712-.288T18 19v-5h-4v5q0 .425-.288.713T13 20zm1-2h6v-4H6zm-.95-6h13.9zm0 0h13.9l-.6-3H5.65z" />
@@ -123,9 +142,9 @@
                         Store
                     </a>
                 </li>
-                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[400ms] menu-item ">
+<li class="translate-y-10 opacity-0 transition-all duration-500 delay-[400ms] menu-item w-full">
                     <a href="https://alwan9.github.io/TPST-BMS/Pages/Maps.html"
-                        class="hover:text-green-600 transition-colors flex items-center gap-3">
+                        class="hover:text-green-600 flex items-center gap-3 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-width="1">
                                 <path stroke-width="1.5"
@@ -137,11 +156,18 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                     d="M17 21L3 7m7 7l-6 6" />
                             </g>
-                        </svg>Cari TPST terdekat
+                        </svg>
+                        TPST Terdekat
                     </a>
                 </li>
-                <li class="translate-y-10 opacity-0 transition-all duration-500 delay-[500ms] menu-item">
-                    <a href="#footer" class="hover:text-green-600 transition-colors">📞 Kontak</a>
+<li class="translate-y-10 opacity-0 transition-all duration-500 delay-[500ms] menu-item w-full">
+    <a href="#footer" class="hover:text-green-600 flex items-center gap-3 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M18.72 14.76c.35-.85.54-1.76.54-2.76c0-.72-.11-1.41-.3-2.05c-.65.15-1.33.23-2.04.23A9.07 9.07 0 0 1 9.5 6.34a9.2 9.2 0 0 1-4.73 4.88c-.04.25-.04.52-.04.78A7.27 7.27 0 0 0 12 19.27c1.05 0 2.06-.23 2.97-.64c.57 1.09.83 1.63.81 1.63c-1.64.55-2.91.82-3.78.82c-2.42 0-4.73-.95-6.43-2.66a9 9 0 0 1-2.24-3.69H2v-4.55h1.09a9.09 9.09 0 0 1 15.33-4.6a9 9 0 0 1 2.47 4.6H22v4.55h-.06L18.38 18l-5.3-.6v-1.67h4.83zm-9.45-2.99c.3 0 .59.12.8.34a1.136 1.136 0 0 1 0 1.6c-.21.21-.5.33-.8.33c-.63 0-1.14-.5-1.14-1.13s.51-1.14 1.14-1.14m5.45 0c.63 0 1.13.51 1.13 1.14s-.5 1.13-1.13 1.13s-1.14-.5-1.14-1.13a1.14 1.14 0 0 1 1.14-1.14" />
+        </svg>
+        Kontak
+    </a>
                 </li>
             </ul>
         </div>
