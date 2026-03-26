@@ -1690,6 +1690,11 @@ video {
   padding-bottom: 6%;
 }
 
+.px-\[15\%\] {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
 .pl-8 {
   padding-left: 2rem;
 }
@@ -3023,6 +3028,11 @@ body.menu-open {
   .lg\:py-2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+
+  .lg\:px-\[35\%\] {
+    padding-left: 35%;
+    padding-right: 35%;
   }
 
   .lg\:pt-\[7\%\] {
